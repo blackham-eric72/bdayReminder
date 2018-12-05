@@ -2,69 +2,70 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getCurrentProfile, deleteAccount } from '../../actions/profileActions';
+import { getCurrentBirthdays } from '../../actions/birthdayActions';
+import Birthdays from '../birthdays/Birthdays';
 import Spinner from '../common/Spinner';
-import ProfileActions from './ProfileActions';
-import Experience from './Experience';
-import Education from './Education';
+import CreateBirthday from '../create-birthday/CreateBirthday';
+
+// import BirthdayActions from './BirthdayActions';
 
 class Dashboard extends Component {
+  // life cycle method:
   componentDidMount() {
-    this.props.getCurrentProfile();
-  }
-
-  onDeleteClick(e) {
-    this.props.deleteAccount();
+    this.props.getCurrentBirthdays();
   }
 
   render() {
     const { user } = this.props.auth;
-    const { profile, loading } = this.props.profile;
+    const { birthdays, loading } = this.props.birthdays;
+    // const birthdays = this.props.birthdays;
+    // console.log(birthdays);
+
+    // const loading = true;
 
     let dashboardContent;
 
-    if (profile === null || loading) {
+    if (birthdays === null || loading) {
       dashboardContent = <Spinner />;
     } else {
-      // Check if logged in user has profile data
-      if (Object.keys(profile).length > 0) {
+      // check if Logged in user has birthdays:
+      if (Object.keys(birthdays).length > 0) {
         dashboardContent = (
           <div>
-            <p className="lead text-muted">
-              Welcome <Link to={`/profile/${profile.handle}`}>{user.name}</Link>
-            </p>
-            <ProfileActions />
-            <Experience experience={profile.experience} />
-            <Education education={profile.education} />
-            <div style={{ marginBottom: '60px' }} />
-            <button
-              onClick={this.onDeleteClick.bind(this)}
-              className="btn btn-danger"
-            >
-              Delete My Account
-            </button>
+            {/* <p className="lead text-muted">Welcome {user.name} </p> */}
+            <h4>Here are the birthdays you currently have saved: </h4>
+            <br />
+            <br />
+            <Birthdays />
+
+            <CreateBirthday />
+            {/* <h5 className="add-more-head">Want to add another?</h5>
+            <Link to="/create-birthday" className="btn btn-lg btn-info">
+              Add Birthday
+            </Link> */}
           </div>
         );
       } else {
-        // User is logged in but has no profile
+        // User is logged in but has no birthdays saved
         dashboardContent = (
           <div>
-            <p className="lead text-muted">Welcome {user.name}</p>
-            <p>You have not yet setup a profile, please add some info</p>
-            <Link to="/create-profile" className="btn btn-lg btn-info">
-              Create Profile
+            <p>
+              {' '}
+              You have not yet saved any birthdays - please get started now!
+            </p>
+            <Link to="/create-birthday" className="btn btn-lg btn-info">
+              Add Birthday
             </Link>
           </div>
         );
       }
     }
-
     return (
       <div className="dashboard">
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              <h1 className="display-4">Dashboard</h1>
+              <h1 className="display-4">Welcome {user.name}</h1>
               {dashboardContent}
             </div>
           </div>
@@ -75,17 +76,17 @@ class Dashboard extends Component {
 }
 
 Dashboard.propTypes = {
-  getCurrentProfile: PropTypes.func.isRequired,
-  deleteAccount: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
-  profile: PropTypes.object.isRequired
+  // getCurrentBirthdays: PropTypes.func.isrequired,
+  auth: PropTypes.object.isRequired
+  // birthday: PropTypes.object.isrequired
 };
 
 const mapStateToProps = state => ({
-  profile: state.profile,
+  birthdays: state.birthday,
   auth: state.auth
 });
 
-export default connect(mapStateToProps, { getCurrentProfile, deleteAccount })(
-  Dashboard
-);
+export default connect(
+  mapStateToProps,
+  { getCurrentBirthdays }
+)(Dashboard);

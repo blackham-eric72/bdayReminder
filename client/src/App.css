@@ -17,7 +17,7 @@ img {
 }
 
 .dark-overlay {
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(37, 37, 37, 0.5);
   position: absolute;
   top: 0;
   left: 0;
@@ -36,4 +36,27 @@ img {
 
 .form-control::placeholder {
   color: #bbb !important;
+}
+
+nav.navbar {
+  background-color: royalblue !important;
+}
+footer {
+  background-color: royalblue !important;
+}
+h5.add-more-head {
+  margin-top: 20px;
+}
+li.flex-space-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+.post-form {
+  margin-top: 20px;
+  max-width: 600px;
+  margin: 50px auto;
+}
+.card-header {
+  text-align: center;
 }

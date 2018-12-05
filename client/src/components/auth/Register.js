@@ -11,6 +11,7 @@ class Register extends Component {
     this.state = {
       name: '',
       email: '',
+      phone: '',
       password: '',
       password2: '',
       errors: {}
@@ -42,6 +43,7 @@ class Register extends Component {
     const newUser = {
       name: this.state.name,
       email: this.state.email,
+      phone: this.state.phone,
       password: this.state.password,
       password2: this.state.password2
     };
@@ -77,6 +79,15 @@ class Register extends Component {
                   onChange={this.onChange}
                   error={errors.email}
                   info="This site uses Gravatar so if you want a profile image, use a Gravatar email"
+                />
+                <TextFieldGroup
+                  placeholder="Phone Number"
+                  name="phone"
+                  type="text"
+                  value={this.state.phone}
+                  onChange={this.onChange}
+                  error={errors.phone}
+                  info="no spaces, and please include area code"
                 />
                 <TextFieldGroup
                   placeholder="Password"
@@ -115,4 +126,7 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(mapStateToProps, { registerUser })(withRouter(Register));
+export default connect(
+  mapStateToProps,
+  { registerUser }
+)(withRouter(Register));

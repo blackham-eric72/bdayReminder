@@ -1,0 +1,10 @@
+const express = require('express');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const passport = require('passport');
+const CronJob = require('cron').CronJob;
+const users = require('./routes/api/users');
+const birthday = require('./routes/api/birthday');
+// const posts = require('./routes/api/posts');
+const moment = require('moment');
+const app = express();
