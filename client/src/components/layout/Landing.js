@@ -20,7 +20,7 @@ class Landing extends Component {
                 <h1 className="display-3 mb-4">Birthday | Reminder</h1>
                 <p className="lead">
                   {' '}
-                  Customize text alerts so that you never forget your sister's
+                  Create text alerts so that you never forget your sister's
                   birthday again
                 </p>
                 <hr />
