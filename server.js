@@ -7,7 +7,6 @@ const http = require('http');
 const cron = require('node-cron');
 const users = require('./routes/api/users');
 const birthday = require('./routes/api/birthday');
-// const posts = require('./routes/api/posts');
 const moment = require('moment');
 const twilio = require('twilio');
 const keys = require('./config/keys');
