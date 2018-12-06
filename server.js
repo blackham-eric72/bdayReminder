@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const path = require('path');
-
+const http = require('http');
 const cron = require('node-cron');
 const users = require('./routes/api/users');
 const birthday = require('./routes/api/birthday');
@@ -76,7 +76,7 @@ function formatDate(d) {
   return (d = mm + '/' + dd + '/' + yyyy);
 }
 
-cron.schedule('0 9 * * *', () => {
+cron.schedule('29 11 * * *', () => {
   Birthday.find()
     .sort({ DOB: -1 })
     .then(birthdays => {
@@ -130,9 +130,10 @@ cron.schedule('0 9 * * *', () => {
     .catch(err => console.log({ nobirthdaysfound: 'No birthdays found' }));
 });
 
-// SENDING A TEXT MESSAGE:;
+setInterval(function() {
+  http.get('http://birthdayreminderpal.herokuapp.com');
+}, 900000); // every 5 minutes (300000)
 
-// console.log(moment().format());
-const PORT = process.env.PORT || 8081;
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => console.log('server running on port', PORT));
