@@ -75,7 +75,7 @@ function formatDate(d) {
   return (d = mm + '/' + dd + '/' + yyyy);
 }
 
-cron.schedule('05 17 * * *', () => {
+cron.schedule('10 17 * * *', () => {
   Birthday.find()
     .sort({ DOB: -1 })
     .then(birthdays => {
